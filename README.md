@@ -13,12 +13,16 @@ to turn a raw policy export or a QKView into a prioritized, explainable set of
 findings — and a polished **Word / Excel** report — in minutes rather than days.
 
 ```
-┌──────────┐   :5175    ┌──────────────┐          ┌─────────────┐
-│ browser  │ ─────────▶ │  web (nginx) │ ──/api──▶ │  backend    │ ──▶ Postgres
-└──────────┘            │  serves SPA  │          │  FastAPI    │
-                        └──────────────┘          └──────┬──────┘
-                                                         │ (optional)
-                                                   F5 iHealth API
+                        ─────────────────────────────────────────────────────────────
+┌──────────┐   :5175    │  ┌──────────────┐           ┌─────────────┐
+│ browser  │ ─────────▶ │  │  web (nginx) │ ──/api──▶ │  backend    │ ──▶ Postgres
+└──────────┘            │  │  serves SPA  │           │  FastAPI    │
+                        │  └──────────────┘           └──────┬──────┘
+                        │                                    │ (optional)
+                        │                              F5 iHealth API
+                        ─────────────────────────────────────────────────────────────
+
+
 ```
 
 ---
@@ -42,7 +46,7 @@ findings — and a polished **Word / Excel** report — in minutes rather than d
 
 | | WAF Policy Audit | LTM Configuration Audit |
 |---|---|---|
-| **Input** | Declarative WAF/AS3 or iControl-REST policy JSON (uploaded) | QKView pulled from F5 iHealth by ID |
+| **Input** | ASM policy JSON (uploaded - Full Export) | QKView pulled from F5 iHealth by ID |
 | **Analysis** | 20+ check groups, maturity templates, OWASP Top-10 scoring | Device inventory, config checks, CVEs, iHealth diagnostics |
 | **Tuning** | Editable violation catalog (severity + score) | Editable diagnostics ignore-list; remove findings |
 | **Reports** | OWASP report, summary, full "ASM Config Review" (Word) | Full "LTM Config Review" (Word, with graphs) + Excel |
