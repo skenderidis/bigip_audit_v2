@@ -1,21 +1,21 @@
-# Secrets / local config — never commit
+# Secrets / local config — never commit (matches at any depth, e.g. app/.env)
 .env
+**/.env
 
 # Python
 **/__pycache__/
 *.pyc
-backend/.venv/
-backend/app/data_seed/
+**/.venv/
+**/data_seed/
 
 # Node / build output
-frontend/node_modules/
-frontend/dist/
+**/node_modules/
+**/dist/
 
 # Logs, OS cruft
 *.log
 .DS_Store
 Thumbs.db
 
-# Local runtime settings written by the app (shipped defaults are tracked;
-# per-deployment edits are not)
-backend/app/data/report_settings.json
+# Per-deployment runtime settings (shipped defaults are tracked; edits are not)
+**/app/data/report_settings.json
