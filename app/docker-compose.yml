@@ -32,7 +32,13 @@ services:
       db:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-waf}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-adsp_audit}
+      # DB connection is passed as parts; the backend assembles the URL and
+      # URL-encodes the password, so any special characters are safe.
+      POSTGRES_USER: ${POSTGRES_USER:-waf}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-adsp_audit}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: "5432"
       SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env}
       APP_NAME: ${APP_NAME:-Audit for BIGIP}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-480}
