@@ -1,0 +1,228 @@
+{
+  "labels": {
+    "VIOL_ACCESS_INVALID": "Access token does not comply with the profile requirements",
+    "VIOL_ACCESS_MALFORMED": "Malformed Access Token",
+    "VIOL_ACCESS_MISSING": "Missing Access Token",
+    "VIOL_ASM_COOKIE_HIJACKING": "ASM Cookie Hijacking",
+    "VIOL_ASM_COOKIE_MODIFIED": "Modified ASM cookie",
+    "VIOL_ATTACK_SIGNATURE": "Attack signature detected",
+    "VIOL_THREAT_CAMPAIGN": "Threat Campaign detected",
+    "VIOL_BLACKLISTED_IP": "IP is blacklisted",
+    "VIOL_BRUTE_FORCE": "Brute Force: Maximum login attempts are exceeded",
+    "VIOL_COOKIE_EXPIRED": "Expired timestamp",
+    "VIOL_COOKIE_LENGTH": "Illegal cookie length",
+    "VIOL_COOKIE_MALFORMED": "Cookie not RFC-compliant",
+    "VIOL_COOKIE_MODIFIED": "Modified domain cookie(s)",
+    "VIOL_CSRF": "CSRF attack detected",
+    "VIOL_CSRF_EXPIRED": "CSRF authentication expired",
+    "VIOL_DATA_GUARD": "Data Guard: Information leakage detected",
+    "VIOL_ENCODING": "Failed to convert character",
+    "VIOL_EVASION": "Evasion technique detected",
+    "VIOL_FILETYPE": "Illegal file type",
+    "VIOL_FILE_UPLOAD": "Disallowed file upload content detected",
+    "VIOL_FILE_UPLOAD_IN_BODY": "Disallowed file upload content detected in body",
+    "VIOL_GEOLOCATION": "Access from disallowed Geolocation",
+    "VIOL_GRAPHQL_FORMAT": "GraphQL data does not comply with format settings",
+    "VIOL_GRAPHQL_MALFORMED": "Malformed GraphQL data",
+    "VIOL_GWT_FORMAT": "GWT data does not comply with format settings",
+    "VIOL_GWT_MALFORMED": "Malformed GWT data",
+    "VIOL_HEADER_LENGTH": "Illegal header length",
+    "VIOL_HEADER_METACHAR": "Illegal meta character in header",
+    "VIOL_HEADER_REPEATED": "Illegal repeated header",
+    "VIOL_HOSTNAME": "Illegal host name",
+    "VIOL_HOSTNAME_MISMATCH": "Host name mismatch",
+    "VIOL_HTTP_PROTOCOL": "HTTP protocol compliance failed",
+    "VIOL_HTTP_RESPONSE_STATUS": "Illegal HTTP status in response",
+    "VIOL_JSON_FORMAT": "JSON data does not comply with format settings",
+    "VIOL_JSON_MALFORMED": "Malformed JSON data",
+    "VIOL_JSON_SCHEMA": "JSON data does not comply with JSON schema",
+    "VIOL_LOGIN": "Illegal login attempt",
+    "VIOL_MALICIOUS_IP": "Access from malicious IP address",
+    "VIOL_MANDATORY_HEADER": "Mandatory HTTP header is missing",
+    "VIOL_MANDATORY_PARAMETER": "Mandatory parameter is missing",
+    "VIOL_MANDATORY_REQUEST_BODY": "Mandatory request body is missing",
+    "VIOL_METHOD": "Illegal method",
+    "VIOL_PARAMETER": "Illegal parameter",
+    "VIOL_PARAMETER_ARRAY_VALUE": "Illegal parameter array value",
+    "VIOL_PARAMETER_DATA_TYPE": "Illegal parameter data type",
+    "VIOL_PARAMETER_DYNAMIC_VALUE": "Illegal dynamic parameter value",
+    "VIOL_PARAMETER_EMPTY_VALUE": "Illegal empty parameter value",
+    "VIOL_PARAMETER_LOCATION": "Illegal parameter location",
+    "VIOL_PARAMETER_MULTIPART_NULL_VALUE": "Null in multi-part parameter value",
+    "VIOL_PARAMETER_NAME_METACHAR": "Illegal meta character in parameter name",
+    "VIOL_PARAMETER_NUMERIC_VALUE": "Illegal parameter numeric value",
+    "VIOL_PARAMETER_REPEATED": "Illegal repeated parameter name",
+    "VIOL_PARAMETER_STATIC_VALUE": "Illegal static parameter value",
+    "VIOL_PARAMETER_VALUE_BASE64": "Illegal Base64 value",
+    "VIOL_PARAMETER_VALUE_LENGTH": "Illegal parameter value length",
+    "VIOL_PARAMETER_VALUE_METACHAR": "Illegal meta character in value",
+    "VIOL_PARAMETER_VALUE_REGEXP": "Parameter value does not comply with regular expression",
+    "VIOL_PLAINTEXT_FORMAT": "Plain text data does not comply with format settings",
+    "VIOL_POST_DATA_LENGTH": "Illegal POST data length",
+    "VIOL_QUERY_STRING_LENGTH": "Illegal query string length",
+    "VIOL_RATING_NEED_EXAMINATION": "Violation Rating Need Examination detected",
+    "VIOL_RATING_THREAT": "Violation Rating Threat detected",
+    "VIOL_REQUEST_LENGTH": "Illegal request length",
+    "VIOL_REQUEST_MAX_LENGTH": "Request length exceeds defined buffer size",
+    "VIOL_SESSION_AWARENESS": "Access from disallowed User/Session/IP/Device ID",
+    "VIOL_URL": "Illegal URL",
+    "VIOL_URL_CONTENT_TYPE": "Illegal request content type",
+    "VIOL_URL_LENGTH": "Illegal URL length",
+    "VIOL_URL_METACHAR": "Illegal meta character in URL",
+    "VIOL_VIRUS": "Virus detected",
+    "VIOL_XML_FORMAT": "XML data does not comply with format settings",
+    "VIOL_XML_MALFORMED": "Malformed XML data",
+    "VIOL_XML_SCHEMA": "XML data does not comply with schema or WSDL document",
+    "VIOL_REDIRECT": "Illegal redirection attempt",
+    "VIOL_SERVER_SIDE_HOST": "Server-side access to disallowed host"
+  },
+  "groups": [
+    {
+      "key": "general",
+      "label": "General",
+      "checks": [
+        "VIOL_ATTACK_SIGNATURE",
+        "VIOL_THREAT_CAMPAIGN",
+        "VIOL_COOKIE_LENGTH",
+        "VIOL_ENCODING",
+        "VIOL_EVASION",
+        "VIOL_HEADER_LENGTH",
+        "VIOL_HEADER_REPEATED",
+        "VIOL_HOSTNAME",
+        "VIOL_HOSTNAME_MISMATCH",
+        "VIOL_HTTP_PROTOCOL",
+        "VIOL_MANDATORY_HEADER",
+        "VIOL_REQUEST_MAX_LENGTH",
+        "VIOL_REDIRECT",
+        "VIOL_SERVER_SIDE_HOST"
+      ]
+    },
+    {
+      "key": "login",
+      "label": "Login",
+      "checks": [
+        "VIOL_BRUTE_FORCE",
+        "VIOL_LOGIN"
+      ]
+    },
+    {
+      "key": "cookies",
+      "label": "Cookies",
+      "checks": [
+        "VIOL_ASM_COOKIE_HIJACKING",
+        "VIOL_ASM_COOKIE_MODIFIED",
+        "VIOL_COOKIE_EXPIRED",
+        "VIOL_COOKIE_MALFORMED",
+        "VIOL_COOKIE_MODIFIED"
+      ]
+    },
+    {
+      "key": "reputation",
+      "label": "Advanced",
+      "checks": [
+        "VIOL_BLACKLISTED_IP",
+        "VIOL_GEOLOCATION",
+        "VIOL_MALICIOUS_IP",
+        "VIOL_RATING_NEED_EXAMINATION",
+        "VIOL_RATING_THREAT",
+        "VIOL_URL_CONTENT_TYPE"
+      ]
+    },
+    {
+      "key": "metachar",
+      "label": "Meta characters",
+      "checks": [
+        "VIOL_HEADER_METACHAR",
+        "VIOL_PARAMETER_NAME_METACHAR",
+        "VIOL_PARAMETER_VALUE_METACHAR",
+        "VIOL_URL_METACHAR"
+      ]
+    },
+    {
+      "key": "allowlist",
+      "label": "Whitelisting / Blacklisting",
+      "checks": [
+        "VIOL_FILETYPE",
+        "VIOL_HTTP_RESPONSE_STATUS",
+        "VIOL_METHOD",
+        "VIOL_PARAMETER",
+        "VIOL_URL"
+      ]
+    },
+    {
+      "key": "lengths",
+      "label": "File Lengths",
+      "checks": [
+        "VIOL_POST_DATA_LENGTH",
+        "VIOL_QUERY_STRING_LENGTH",
+        "VIOL_REQUEST_LENGTH",
+        "VIOL_URL_LENGTH"
+      ]
+    },
+    {
+      "key": "parameters",
+      "label": "Parameters",
+      "checks": [
+        "VIOL_MANDATORY_PARAMETER",
+        "VIOL_MANDATORY_REQUEST_BODY",
+        "VIOL_PARAMETER_ARRAY_VALUE",
+        "VIOL_PARAMETER_DATA_TYPE",
+        "VIOL_PARAMETER_DYNAMIC_VALUE",
+        "VIOL_PARAMETER_EMPTY_VALUE",
+        "VIOL_PARAMETER_LOCATION",
+        "VIOL_PARAMETER_MULTIPART_NULL_VALUE",
+        "VIOL_PARAMETER_NUMERIC_VALUE",
+        "VIOL_PARAMETER_REPEATED",
+        "VIOL_PARAMETER_STATIC_VALUE",
+        "VIOL_PARAMETER_VALUE_BASE64",
+        "VIOL_PARAMETER_VALUE_LENGTH",
+        "VIOL_PARAMETER_VALUE_REGEXP"
+      ]
+    },
+    {
+      "key": "content",
+      "label": "Content profiles (JSON / XML / GraphQL)",
+      "checks": [
+        "VIOL_GRAPHQL_FORMAT",
+        "VIOL_GRAPHQL_MALFORMED",
+        "VIOL_GWT_FORMAT",
+        "VIOL_GWT_MALFORMED",
+        "VIOL_JSON_FORMAT",
+        "VIOL_JSON_MALFORMED",
+        "VIOL_JSON_SCHEMA",
+        "VIOL_PLAINTEXT_FORMAT",
+        "VIOL_XML_FORMAT",
+        "VIOL_XML_MALFORMED",
+        "VIOL_XML_SCHEMA"
+      ]
+    },
+    {
+      "key": "files",
+      "label": "Files & Content inspection",
+      "checks": [
+        "VIOL_DATA_GUARD",
+        "VIOL_FILE_UPLOAD",
+        "VIOL_FILE_UPLOAD_IN_BODY",
+        "VIOL_VIRUS"
+      ]
+    },
+    {
+      "key": "access",
+      "label": "Session",
+      "checks": [
+        "VIOL_CSRF",
+        "VIOL_CSRF_EXPIRED",
+        "VIOL_SESSION_AWARENESS"
+      ]
+    },
+    {
+      "key": "jwt",
+      "label": "JWT Validation",
+      "checks": [
+        "VIOL_ACCESS_INVALID",
+        "VIOL_ACCESS_MALFORMED",
+        "VIOL_ACCESS_MISSING"
+      ]
+    }
+  ]
+}

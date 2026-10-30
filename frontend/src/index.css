@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lock the browser's outer scrollbar off.
+   Layout is `h-screen overflow-hidden` and every scroll lives inside a child
+   with overflow-y-auto (main content, sidebar, drawer body, DataGrid). Any
+   stray content that would otherwise push <body> past 100vh is clipped
+   instead of adding a second, browser-owned scrollbar. */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Fade-in used by the LoadingOverlay so the overlay doesn't hard-cut
+   on tab switches — gentle 180 ms ease-in gives the eye time to catch it. */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 180ms ease-in;
+}

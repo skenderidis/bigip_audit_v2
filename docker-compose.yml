@@ -1,0 +1,67 @@
+# ──────────────────────────────────────────────────────────────────────────
+# Audit for BIGIP — full stack.
+#   db       Postgres (the app's own database; data persists in a volume)
+#   backend  FastAPI + uvicorn on :8002 (internal only)
+#   web      nginx serving the SPA on :5175, proxying /api → backend
+#
+# Config comes from a .env file next to this file (copy .env.example → .env).
+# Only the web port is published; the browser talks to a single origin.
+# ──────────────────────────────────────────────────────────────────────────
+name: adsp-audit
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-adsp_audit}
+      POSTGRES_USER: ${POSTGRES_USER:-waf}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-waf} -d ${POSTGRES_DB:-adsp_audit}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-waf}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-adsp_audit}
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env}
+      APP_NAME: ${APP_NAME:-Audit for BIGIP}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-480}
+      # "*" = any origin, no credentials (safe; auth is a Bearer token). The SPA
+      # is same-origin through nginx anyway, so CORS is normally not exercised.
+      CORS_ORIGINS: ${CORS_ORIGINS:-["*"]}
+      FIRST_ADMIN_USERNAME: ${FIRST_ADMIN_USERNAME:-admin}
+      FIRST_ADMIN_PASSWORD: ${FIRST_ADMIN_PASSWORD:?set FIRST_ADMIN_PASSWORD in .env}
+      FIRST_ADMIN_EMAIL: ${FIRST_ADMIN_EMAIL:-admin@company.com}
+      DEBUG: "false"
+    volumes:
+      # User-editable settings (violation catalog, custom templates, ignore
+      # list, report cover) persist here; audits/credentials live in Postgres.
+      - backend-data:/app/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${WEB_PORT:-5175}:80"
+
+volumes:
+  pgdata:
+  backend-data:
