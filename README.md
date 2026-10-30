@@ -34,54 +34,60 @@ findings — and a polished **Word / Excel** report — in minutes rather than d
 
 ---
 
+## How it helps
+
+- **Faster reviews** — a raw export or QKView becomes a structured, prioritized
+  report in minutes.
+- **Consistent & explainable** — every finding maps to a tunable catalog entry
+  or an iHealth diagnostic, so results are defensible and repeatable.
+- **Actionable** — maturity-level gaps and OWASP coverage tell you exactly what
+  to fix next.
+- **Client-ready** — professional Word/Excel deliverables, with the ability to
+  curate findings before export.
+
+---
+
 ## WAF Policy Audit
 
-Turn an exported WAF/ASM policy into a prioritized findings list, a maturity
-gap analysis, and an OWASP coverage score.
+Turn an exported WAF/ASM policy into a prioritized findings list, a maturity gap
+analysis, and an OWASP coverage score.
 
-**Import** — Upload a policy as JSON. Both shapes are understood and normalized
-automatically: the declarative **WAF Manager / AS3** form and a flat
-**iControl-REST** BIG-IP export.
+**Maturity levels (Level 1 / 2 / 3)** — A WAF policy can be set up loosely or
+strictly. You pick a target level — from basic (Level 1) to hardened (Level 3) —
+and the tool compares your policy against it and shows the **gaps**: protections
+that are missing, turned on but weaker than they should be, or set only to log
+instead of actually block. The levels are starting points you can edit, and you
+can save your own.
 
-**Posture templates (Level 1 / 2 / 3)** — Compare the policy against a target
-maturity level. The audit reports the **gap**: which controls are missing,
-weaker than target, or in the wrong enforcement state. Templates are editable,
-and you can save your own.
+**What gets checked** — The tool inspects more than 20 areas of the policy and
+flags anything that looks off. In plain terms it looks at: how the policy learns
+your traffic and whether it is really blocking attacks; known evasion tricks;
+the attack-signature sets that catch things like SQL injection and cross-site
+scripting; and the rules around URLs, parameters, headers, cookies, allowed HTTP
+methods, response codes, sensitive data, trusted IPs, IP reputation, file types,
+redirects, and geolocation. Every issue is labelled **info**, **warning**, or
+**error** and given a score. If your organization weighs risks differently, you
+can change those severities and scores in **Settings → Violation Catalog**, and
+every report updates to match.
 
-**Check coverage** — 20+ check groups across the whole policy, including:
-policy builder / learning mode, blocking & enforcement settings, evasion
-techniques, compliance, **attack-signature sets and signature overview**, URLs,
-parameters, headers, cookies, HTTP methods, response codes, sensitive
-parameters, trusted IPs, **IP Intelligence**, file types, redirection domains,
-and **geolocation**. Each finding carries a severity (info / warning / error)
-and a score pulled from the **Violation Catalog**, which you can tune in
-Settings so results match your organization's risk weighting.
+**OWASP Top-10 coverage** — The OWASP Top-10 is the industry's standard list of
+the most common web application risks. The tool gives you a score for each of
+the ten categories (from **A01 Broken Access Control** to **A10 SSRF**) based on
+what your policy actually enforces, so you can see your coverage at a glance. A
+few controls can't be read from the policy file alone — for example TLS /
+encryption, which is configured on the LTM side, not in the WAF policy. For
+those, the tool simply asks you to confirm whether the control is in place, so
+the score reflects your real environment instead of guessing.
 
-**OWASP Top-10 (2021) coverage** — A per-category score (A01 Broken Access
-Control through A10 SSRF) computed from the signature sets and protections the
-policy actually enforces. Controls that can't be derived from a declarative
-policy (for example the virtual server's TLS posture, which lives on the LTM
-side) are surfaced as **acknowledgement** items you accept per policy, so the
-score reflects reality.
-
-**Guided Template Wizard** — Don't have a policy yet, or want a recommended
-baseline? Answer a short series of questions and the wizard produces the set of
-checks/controls to enable. Two flows:
-- **Web Application** — the standard interactive-app baseline.
-- **API** — OpenAPI-driven: supplying an OpenAPI spec unlocks schema
-  whitelisting, parameter and header enforcement, etc.; a JWT question enables
-  the JWT validation checks in place of login-page protections.
-
-  (Uses **allow list / block list** terminology throughout.)
-
-**Bundled reference data** — ~9,300 attack signatures, 30 signature sets, and
-~1,000 threat campaigns are seeded on first start and browsable/searchable in
-Settings, so signature-set findings are explained in context.
-
-**Outputs** — Per-policy **OWASP report**, a **download summary** of
-suggestions, a **coverage-gap** report, and the full **"F5 ASM – Config
-Review"** Word document. Individual findings can be removed, and removed items
-are excluded from the report.
+**Guided setup wizard** — Don't have a policy yet, or want a solid starting
+point? Answer a few plain-language questions and the wizard recommends which
+protections to turn on. There are two paths:
+- **Web application** — for a normal website or web app.
+- **API** — for an API backend. If you upload its **OpenAPI specification** (the
+  file that describes the API's endpoints and fields), the wizard enables
+  precise checks on each parameter and header; and if the API uses **JWT**
+  tokens to sign in users, it turns on the matching token-validation checks
+  instead of login-page protections.
 
 ---
 
@@ -126,27 +132,6 @@ into the Word report.
 **Device list** — Every audited device listed by its **FQDN**, with at-a-glance
 **LTM / CVE / Other** finding counts and one-click **Word / Excel** export per
 device.
-
-**Curate before you report** — Remove any finding, CVE, or diagnostic (it drops
-into a collapsible *Removed* section and is excluded from the Word report).
-
-**Outputs** — A faithful **"F5 LTM – Config Review"** Word document (cover page,
-populated table of contents, per-finding sections, an expiring-certificates
-table, and the resource graphs) plus an **Excel** workbook. The detail view is
-organized into **Device Info / Inventory / LTM Findings / Diagnostics** tabs.
-
----
-
-## How it helps
-
-- **Faster reviews** — a raw export or QKView becomes a structured, prioritized
-  report in minutes.
-- **Consistent & explainable** — every finding maps to a tunable catalog entry
-  or an iHealth diagnostic, so results are defensible and repeatable.
-- **Actionable** — maturity-level gaps and OWASP coverage tell you exactly what
-  to fix next.
-- **Client-ready** — professional Word/Excel deliverables, with the ability to
-  curate findings before export.
 
 ---
 
@@ -213,8 +198,6 @@ Two named volumes hold all state and survive `docker compose down`:
   `SECRET_KEY`).
 - Login is **rate-limited per client IP** (10 free attempts, then 1 per 10s);
   nginx forwards the real client IP so the limit is per-client, not global.
-- Put a TLS-terminating proxy in front of the web container for any non-local
-  deployment, and use strong, unique values for `SECRET_KEY` and the passwords.
 
 ## Troubleshooting
 
@@ -228,5 +211,14 @@ Two named volumes hold all state and survive `docker compose down`:
 
 ## Tech stack
 
-FastAPI (async SQLAlchemy) + Postgres on the backend; React + Vite + Tailwind
-on the frontend, served by nginx. Reports via `python-docx` and `openpyxl`.
+**Backend** — Python / **FastAPI** with async **SQLAlchemy** over
+**PostgreSQL**. JWT (HS256) auth with bcrypt-hashed passwords; the stored iHealth
+secret is encrypted with Fernet. QKViews are fetched from the **F5 iHealth API**
+with httpx, and **Word / Excel** reports are generated with `python-docx` and
+`openpyxl`.
+
+**Frontend** — **React** (Vite) with **Tailwind CSS**, built to static assets
+and served by **nginx**, which also reverse-proxies the API to the backend.
+
+**Packaging** — **Docker Compose**: three health-checked services (nginx web,
+FastAPI backend, PostgreSQL), with all state kept in named volumes.
