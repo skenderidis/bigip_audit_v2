@@ -23,6 +23,21 @@ findings — and a polished **Word / Excel** report — in minutes rather than d
 
 ---
 
+## Contents
+
+- [What it does at a glance](#what-it-does-at-a-glance)
+- [How it helps](#how-it-helps)
+- [WAF Policy Audit](#waf-policy-audit)
+- [LTM Configuration Audit](#ltm-configuration-audit)
+- [Getting started (Docker)](#getting-started-docker)
+- [Configuration](#configuration)
+- [Data & persistence](#data--persistence)
+- [Security notes](#security-notes)
+- [Troubleshooting](#troubleshooting)
+- [Tech stack](#tech-stack)
+
+---
+
 ## What it does at a glance
 
 | | WAF Policy Audit | LTM Configuration Audit |
