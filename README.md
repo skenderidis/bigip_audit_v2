@@ -71,14 +71,18 @@ findings — and a polished **Word / Excel** report — in minutes rather than d
 Turn an exported WAF/ASM policy into a prioritized findings list, a maturity gap
 analysis, and an OWASP coverage score.
 
-**Maturity levels (Level 1 / 2 / 3)** — A WAF policy can be set up loosely or
-strictly. You pick a target level — from basic (Level 1) to hardened (Level 3) —
-and the tool compares your policy against it and shows the **gaps**: protections
-that are missing, turned on but weaker than they should be, or set only to log
-instead of actually block. The levels are starting points you can edit, and you
-can save your own.
+**Import** — Upload an ASM policy as JSON. Make sure you export it as a 
+***Full Policy*** and not as ***Template-based***, as most of the configurations 
+are not shown on the second option. 
 
-**What gets checked** — The tool inspects more than 20 areas of the policy and
+
+**Templates** — A WAF policy can be set up loosely or
+strictly. You pick a configuration ***template*** and the tool compares your 
+policy against it and shows the **gaps**: protections that are missing, turned 
+on but weaker than they should be, or set only to log instead of actually block. 
+The levels are starting points you can edit, and you can save your own.
+
+**Health check** — The tool inspects more than 20 areas of the policy and
 flags anything that looks off. In plain terms it looks at: how the policy learns
 your traffic and whether it is really blocking attacks; known evasion tricks;
 the attack-signature sets that catch things like SQL injection and cross-site
