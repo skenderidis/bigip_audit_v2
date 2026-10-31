@@ -1,4 +1,4 @@
-# Audit for BIGIP
+# Audit for BIGIP LTM&ASM
 
 A web application for auditing **F5 BIG-IP** devices and producing clear,
 client-ready findings and reports. It covers two complementary review types:
@@ -12,18 +12,10 @@ It's built for F5 administrators, security engineers, and consultants who need
 to turn a raw policy export or a QKView into a prioritized, explainable set of
 findings — and a polished **Word / Excel** report — in minutes rather than days.
 
-```
-                        ─────────────────────────────────────────────────────────────
-┌──────────┐   :5175    │  ┌──────────────┐           ┌─────────────┐
-│ browser  │ ─────────▶ │  │  web (nginx) │ ──/api──▶ │  backend    │ ──▶ Postgres
-└──────────┘            │  │  serves SPA  │           │  FastAPI    │
-                        │  └──────────────┘           └──────┬──────┘
-                        │                                    │ (optional)
-                        │                              F5 iHealth API
-                        ─────────────────────────────────────────────────────────────
+
+<img width="1368" height="574" alt="Screenshot 2026-10-31 at 9 13 14 AM" src="https://github.com/user-attachments/assets/444c9aea-5636-4cbc-876d-feb5dfe8ea76" />
 
 
-```
 
 ---
 
